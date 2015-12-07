@@ -1,0 +1,36 @@
+---
+- hosts: galaxy-servers
+  vars_files:
+    - vars.yml
+  remote_user: galaxy
+
+  tasks:
+
+  - name: Create the code directory
+    file: group={{ project_user }} owner={{ project_user }} mode=755 state=directory path={{ project_home_dir }}/{{ project_dir }}/
+
+  - name: Pull sources from the repository
+    git: repo={{ project_repo }} dest={{ project_home_dir }}/{{ project_dir }}/ accept_hostkey=True
+
+  - name: Upload configuration files
+    copy: src=configs/galaxy/ dest={{ project_home_dir }}/{{ project_dir }}/config/
+
+  - name: Create data folder
+    file: path={{ project_home_dir }}/{{ project_data_dir }} state=directory
+
+  - name: Create tools dir
+    file: path={{ project_home_dir }}/{{ project_tools_dir }}/{{ project_tools_dep_dir }} state=directory
+
+  - name: Set virtual environment
+    shell: virtualenv --no-site-packages  ./{{ project_dir }}/.venv
+
+#  - name: Activate virtual environment
+#    shell: . ./{{ project_dir }}/.venv/bin/activate
+
+#  - name: Install python Pip packages
+#    pip: name={{ item }} virtualenv={{ project_home_dir}}/{{ project_dir }}/.venv
+#    with_items: "{{ python_packages_pip }}"
+
+
+  handlers:
+    - include: handlers.yml

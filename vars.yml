@@ -1,0 +1,38 @@
+---
+project_user: galaxy
+project_dir: galaxy-dist
+project_home_dir: /home/galaxy
+project_data_dir: galaxy-database
+project_tools_dir: galaxy-tools
+project_tools_dep_dir: tools_dependancy
+project_repo: git://github.com/michal-stuglik/galaxy.git
+
+system_packages:
+  - build-essential
+  - git
+  - libevent-dev
+  - fort77
+  - gfortran
+  - libc6-dev
+  - lib32z1
+  - lib32ncurses5
+  - g++-multilib
+  - libc6-dev-i386
+
+system_web_and_db_packages:
+  - nginx
+  - postgresql
+  - postgresql-server-dev-all
+
+python_packages_system:
+  - python-dev
+  - python-setuptools
+  - python-pip
+  - python-virtualenv
+  - python-psycopg2
+
+python_packages_pip:
+  - pyopenssl
+  - ndg-httpsclient
+  - pyasn1
+
