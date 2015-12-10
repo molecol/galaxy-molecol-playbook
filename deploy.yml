@@ -31,7 +31,7 @@
     shell: . {{ project_home_dir }}/{{ project_dir }}/.venv/bin/activate
 
   - name: Install python Pip packages
-    pip: name={{ item }} virtualenv={{ project_home_dir}}/{{ project_dir }}/.venv virtualenv_site_packages=no
+    pip: name={{ item }} virtualenv={{ project_home_dir}}/{{ project_dir }}/.venv virtualenv_site_packages=no extra_args='--upgrade'
     with_items: "{{ python_packages_pip }}"
 
 
