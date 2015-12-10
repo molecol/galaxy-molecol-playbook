@@ -1,0 +1,16 @@
+---
+- hosts: galaxy-servers
+  vars_files:
+    - vars.yml
+  gather_facts: true
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Add x2go Repository
+    apt_repository: repo='ppa:x2go/stable' state=present
+    register: ppastable
+
+  - name: Install remote system packages
+    apt: pkg={{ item }} state=installed update-cache=yes
+    with_items: "{{ system_remote_packages }}"

@@ -18,6 +18,8 @@ system_packages:
   - lib32ncurses5
   - g++-multilib
   - libc6-dev-i386
+  - libffi-dev
+  - software-properties-common
 
 system_web_and_db_packages:
   - nginx
@@ -35,4 +37,9 @@ python_packages_pip:
   - pyopenssl
   - ndg-httpsclient
   - pyasn1
+  - distribute
 
+system_remote_packages:
+
+  - x2goserver
+  - x2goserver-xsession

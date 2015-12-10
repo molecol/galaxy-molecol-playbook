@@ -22,14 +22,17 @@
     file: path={{ project_home_dir }}/{{ project_tools_dir }}/{{ project_tools_dep_dir }} state=directory
 
   - name: Set virtual environment
-    shell: virtualenv --no-site-packages  ./{{ project_dir }}/.venv
+    shell: virtualenv --no-site-packages  {{ project_home_dir }}/{{ project_dir }}/.venv
 
-#  - name: Activate virtual environment
-#    shell: . ./{{ project_dir }}/.venv/bin/activate
+  - name: Upgrade Pip package
+    pip: name=pip virtualenv={{ project_home_dir}}/{{ project_dir }}/.venv  extra_args='--upgrade'
 
-#  - name: Install python Pip packages
-#    pip: name={{ item }} virtualenv={{ project_home_dir}}/{{ project_dir }}/.venv
-#    with_items: "{{ python_packages_pip }}"
+  - name: Activate virtual environment
+    shell: . {{ project_home_dir }}/{{ project_dir }}/.venv/bin/activate
+
+  - name: Install python Pip packages
+    pip: name={{ item }} virtualenv={{ project_home_dir}}/{{ project_dir }}/.venv virtualenv_site_packages=no
+    with_items: "{{ python_packages_pip }}"
 
 
   handlers:
