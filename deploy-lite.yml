@@ -13,7 +13,7 @@
     git: repo={{ project_repo }} dest={{ project_home_dir }}/{{ project_dir }}/ accept_hostkey=True
 
   - name: Upload configuration files
-    copy: src=configs/production/galaxy/ dest={{ project_home_dir }}/{{ project_dir }}/config/
+    copy: src=configs/lite/galaxy/ dest={{ project_home_dir }}/{{ project_dir }}/config/
 
   - name: Create data folder
     file: path={{ project_home_dir }}/{{ project_data_dir }} state=directory
@@ -22,7 +22,7 @@
     file: path={{ project_home_dir }}/{{ project_tools_dir }}/{{ project_tools_dep_dir }} state=directory
 
   - name: Set virtual environment
-    shell: virtualenv --no-site-packages  {{ project_home_dir }}/{{ project_dir }}/.venv
+    shell: virtualenv {{ project_home_dir }}/{{ project_dir }}/.venv
 
   - name: Upgrade Pip package
     pip: name=pip virtualenv={{ project_home_dir}}/{{ project_dir }}/.venv  extra_args='--upgrade'
