@@ -10,7 +10,7 @@
     <destinations>
         <!--<destination id="local" runner="local"/>-->
         <destination id="blast" runner="dynamic">
-            <param id="slots">20</param>
+            <param id="slots">5</param>
         </destination>
     </destinations>
 
