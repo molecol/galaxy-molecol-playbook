@@ -9,5 +9,8 @@
     </handlers>
     <destinations>
         <destination id="local" runner="local"/>
+        <destination id="blast" runner="local">
+            <param id="slots">20</param>
+        </destination>
     </destinations>
 </job_conf>
