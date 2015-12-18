@@ -1,19 +1,28 @@
 ---
 - hosts: galaxy-servers
+  remote_user: galaxy
   vars_files:
     - vars.yml
-  remote_user: galaxy
 
   tasks:
 
   - name: Create the code directory
     file: group={{ project_user }} owner={{ project_user }} mode=755 state=directory path={{ project_home_dir }}/{{ project_dir }}/
 
-  - name: Pull sources from the repository
-    git: repo={{ project_repo }} dest={{ project_home_dir }}/{{ project_dir }}/ accept_hostkey=True
+  - name: Pull release_15.10 branch from the repository
+    git: repo={{ project_repo_galaxyproject }} dest={{ project_home_dir }}/{{ project_dir }}/ accept_hostkey=True version=release_15.10
+    when: repo == "release_15.10"
+
+  - name: Pull GalaxyProject dev branch from the repository
+    git: repo={{ project_repo_galaxyproject }} dest={{ project_home_dir }}/{{ project_dir }}/ accept_hostkey=True version=dev
+    when: repo == "gp-dev"
+
+  - name: Pull default IAS sources from the repository
+    git: repo={{ project_repo_ias }} dest={{ project_home_dir }}/{{ project_dir }}/ accept_hostkey=True
+    when: repo == "ias-dev"
 
   - name: Upload configuration files
-    copy: src=configs/production/galaxy/ dest={{ project_home_dir }}/{{ project_dir }}/config/
+    copy: src=configs/{{ repo }}/{{ mode }}/galaxy/ dest={{ project_home_dir }}/{{ project_dir }}/config/
 
   - name: Create data folder
     file: path={{ project_home_dir }}/{{ project_data_dir }} state=directory

@@ -1,10 +1,11 @@
 ---
 - hosts: galaxy-servers
-  vars_files:
-    - vars.yml
   gather_facts: true
   become: yes
   become_method: sudo
+
+  vars_files:
+    - vars.yml
 
   tasks:
   - name: Create user
@@ -32,11 +33,17 @@
   - name: Change permissions to project's root/space
     shell: chown -R {{ project_user }}:{{ project_user }} {{ project_home_dir }}
 
+  - name: Uninstall web server packages
+    apt: pkg=nginx state=removed update-cache=yes
+    when: mode == "lite"
+
   # Postgres database
   - include: 'tasks/postgres.yml'
+    when: mode == "production"
 
   # nginx webserwer
   - include: 'tasks/nginx.yml'
+    when: mode == "production"
 
   handlers:
     - include: 'handlers.yml'

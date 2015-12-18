@@ -15,5 +15,5 @@
     #sudo unzip 2.2.zip
 
   - name: Install nginx configuration file.
-    copy: src=configs/nginx/nginx.conf dest=/etc/nginx/
+    copy: src=configs/{{ repo }}/{{ mode }}/nginx/nginx.conf dest=/etc/nginx/
     notify: restart nginx

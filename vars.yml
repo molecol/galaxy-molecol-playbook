@@ -5,8 +5,16 @@ project_home_dir: /home/galaxy
 project_data_dir: galaxy-database
 project_tools_dir: galaxy-tools
 project_tools_dep_dir: tools_dependancy
-project_repo: git://github.com/michal-stuglik/galaxy.git
+project_repo_ias: git://github.com/michal-stuglik/galaxy.git
+project_repo_galaxyproject: git://github.com/galaxyproject/galaxy.git
 
+# default repository name
+repo: "ias-dev"
+
+# default configs mode [lite, production]
+mode: "lite"
+
+# mandatory, system (debian-familiy) programs
 system_packages:
   - build-essential
   - git
