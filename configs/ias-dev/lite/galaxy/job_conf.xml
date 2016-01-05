@@ -6,9 +6,9 @@
         <plugin id="blast" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner" workers="2"/>
      </plugins>
 
-    <!--<handlers>-->
-        <!--<handler id="main"/>-->
-    <!--</handlers>-->
+    <handlers>
+        <handler id="main"/>
+    </handlers>
 
     <destinations default="local">
         <destination id="local" runner="local"/>
