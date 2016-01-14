@@ -1,4 +1,4 @@
-# galaxy-ias-playbook
+# galaxy-molecol-playbook
 
-Galaxy-IAS playbook: install, setup, management
+Galaxy-on-Leskowiec playbook: install, setup, management
 
